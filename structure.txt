@@ -1,0 +1,58 @@
+/project-root
+├── /backend
+│   ├── /app
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── routes.py
+│   │   ├── services.py
+│   │   ├── utils.py
+│   │   ├── config.py
+│   │   ├── /static
+│   │   └── /templates
+│   ├── /tests
+│   │   ├── test_routes.py
+│   │   ├── test_models.py
+│   │   └── test_services.py
+│   ├── requirements.txt
+│   ├── run.py
+│   └── venv/
+├── /frontend
+│   ├── /web
+│   │   ├── /public
+│   │   │   └── index.html
+│   │   ├── /src
+│   │   │   ├── /components
+│   │   │   ├── /pages
+│   │   │   ├── /assets
+│   │   │   ├── App.js
+│   │   │   ├── index.js
+│   │   │   └── App.css
+│   │   ├── package.json
+│   │   ├── tailwind.config.js (if using Tailwind CSS)
+│   │   └── webpack.config.js (if using custom Webpack setup)
+│   ├── /mobile
+│   │   ├── /android
+│   │   ├── /ios
+│   │   ├── /src
+│   │   │   ├── /components
+│   │   │   ├── /screens
+│   │   │   ├── /assets
+│   │   │   ├── App.js
+│   │   │   └── index.js
+│   │   ├── package.json
+│   │   └── metro.config.js
+├── /desktop
+│   ├── /public
+│   │   └── index.html
+│   ├── /src
+│   │   ├── /components
+│   │   ├── /pages
+│   │   ├── /assets
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   ├── App.css
+│   │   └── electron.js
+│   ├── package.json
+│   ├── electron.config.js
+│   └── webpack.config.js
+└── README.md
