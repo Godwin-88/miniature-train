@@ -11,27 +11,16 @@ migrate = Migrate()
 #These are the database and migration instances. 
 #They need to be initialized separately to ensure they can be accessed throughout the application.
 
-
-
-
-def create_app(config_class=Config):
-    # Initialize the Flask app
+def create_app():
     app = Flask(__name__)
-    
-    # Load configurations from the config file
-    app.config.from_object(config_class)
+    app.config.from_object(Config)  # Load the configuration from Config
 
-    # Initialize extensions with the app
     db.init_app(app)
     migrate.init_app(app, db)
-    CORS(app)  # Enable Cross-Origin Resource Sharing
 
-    # Import and register blueprints
+    # Register blueprints
     from .routes import main as main_blueprint
     app.register_blueprint(main_blueprint)
-
-    # Additional initialization steps if required
-    # e.g., logging, custom error handling
 
     return app
 

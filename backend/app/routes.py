@@ -1,9 +1,20 @@
-from flask import Blueprint, jsonify, request, abort
+from flask import Blueprint, jsonify, request, abort, render_template
 from . import db
 from .models import Account, Transaction, JournalEntry, JournalEntryLine, FinancialStatement, FinancialStatementItem
+from datetime import datetime
 
 # Define a Blueprint
 main = Blueprint('main', __name__)
+
+# Home page route
+@main.route('/')
+def home():
+    return "Welcome to the Accounting Management System Home Page"
+
+# Favicon route (Optional)
+@main.route('/favicon.ico')
+def favicon():
+    return "", 204
 
 # Create a new account
 @main.route('/accounts', methods=['POST'])
@@ -49,7 +60,7 @@ def post_transaction():
     if not data or 'account_id' not in data or 'amount' not in data or 'transaction_type' not in data:
         abort(400, description="Missing required fields")
 
-    account = Account.query.get(data['account_id'])
+    account = db.session.get(Account, data['account_id'])  # Updated to use db.session.get
 
     if not account:
         abort(404, description="Account not found")
@@ -93,7 +104,7 @@ def create_journal_entry():
     total_credit = 0
 
     for line in data['lines']:
-        account = Account.query.get(line['account_id'])
+        account = db.session.get(Account, line['account_id'])  # Updated to use db.session.get
 
         if not account:
             abort(404, description="Account not found")
@@ -132,8 +143,8 @@ def generate_financial_statement():
         abort(400, description="Missing required fields")
 
     statement_type = data['statement_type']
-    period_start = data['period_start']
-    period_end = data['period_end']
+    period_start = datetime.strptime(data['period_start'], '%Y-%m-%d')  # Convert string to datetime
+    period_end = datetime.strptime(data['period_end'], '%Y-%m-%d')  # Convert string to datetime
 
     new_statement = FinancialStatement(
         statement_type=statement_type,
@@ -167,7 +178,7 @@ def generate_financial_statement():
 # Get a financial statement by ID
 @main.route('/financial_statements/<int:id>', methods=['GET'])
 def get_financial_statement(id):
-    statement = FinancialStatement.query.get(id)
+    statement = db.session.get(FinancialStatement, id)  # Updated to use db.session.get
 
     if not statement:
         abort(404, description="Financial statement not found")
@@ -188,3 +199,4 @@ def get_financial_statement(id):
     }
 
     return jsonify(result), 200
+
