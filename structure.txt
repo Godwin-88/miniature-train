@@ -68,5 +68,41 @@
 
 
 
+backend/
+│
+├── app/
+│   ├── static/
+│   │   ├── css/
+│   │   │   ├── styles.css
+│   │   │   └── custom.css
+│   │   ├── js/
+│   │   │   ├── scripts.js
+│   │   │   └── custom.js
+│   │   ├── img/
+│   │   │   ├── logo.png
+│   │   │   └── background.jpg
+│   │   ├── fonts/
+│   │   │   ├── custom-font.ttf
+│   │   │   └── icon-font.woff
+│   │   ├── vendor/
+│   │   │   ├── bootstrap/
+│   │   │   │   ├── css/
+│   │   │   │   │   └── bootstrap.min.css
+│   │   │   │   ├── js/
+│   │   │   │   │   └── bootstrap.bundle.min.js
+│   │   │   └── jquery/
+│   │   │       ├── jquery.min.js
+│   │   │       └── jquery-ui.min.js
+│   │   ├── favicon.ico
+│   │   └── robots.txt
+│   ├── templates/
+│   │   ├── index.html
+│   │   ├── base.html
+│   │   └── partials/
+│   │       ├── header.html
+│   │       └── footer.html
+│   └── __init__.py
+│
+└── ...
 
 
