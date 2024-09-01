@@ -56,7 +56,7 @@ def create_journal_entry(description, lines):
     db.session.commit()
 
     for line in lines:
-        account = Account.query.get(line['account_id'])
+        account = db.session.get(Account, line['account_id'])
         if not account:
             raise ValueError(f"Account ID {line['account_id']} not found")
 
@@ -67,12 +67,14 @@ def create_journal_entry(description, lines):
             credit=line.get('credit', 0.0)
         )
 
-        # Update account balance correctly
+        # Correctly update the account balance
         account.balance += line.get('debit', 0.0) - line.get('credit', 0.0)
         db.session.add(journal_line)
 
     db.session.commit()
     return journal_entry
+
+
 
 def generate_financial_statement(statement_type, period_start, period_end):
     financial_statement = FinancialStatement(
